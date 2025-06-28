@@ -233,16 +233,7 @@ function Main() {
         </Content>
 
         <Footer className='text-center font-text-font font-medium '>
-          ©2023 Developed By
-          {' '}
-          <a
-            className='text-color-primary hover:text-color-secondary'
-            href='http://www.samiurrahmanmukul.epizy.com'
-            target='_blank'
-            rel='noreferrer'
-          >
-            Samiur Rahman Mukul
-          </a>
+          ©2025 PPPL B Kelompok 8
         </Footer>
       </Layout>
     </Layout>
