@@ -45,7 +45,7 @@ function RoomPreview(props) {
 
   return (
     <>
-      <MainLayout title='Beach Resort ― Rooms Preview'>
+      <MainLayout title='Rooms Preview'>
         {!props?.room && !props?.error ? (
           <Loading />
         ) : props?.error ? (

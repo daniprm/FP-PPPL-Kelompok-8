@@ -42,7 +42,7 @@ function ResetPassword() {
 
   return (
     <PublicRoute>
-      <MainLayout title='Beach Resort ― Reset Password'>
+      <MainLayout title='Reset Password'>
         <div style={{ width: '400px', height: 'calc(100vh - 205px)', margin: '0 auto' }}>
           <Form
             form={form}

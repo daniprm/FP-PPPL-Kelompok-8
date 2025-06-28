@@ -62,7 +62,7 @@ function Registration() {
 
   return (
     <PublicRoute>
-      <MainLayout title='Beach Resort ― Registration'>
+      <MainLayout title='Registration'>
         <div style={{ width: '400px', height: 'calc(100vh - 205px)', margin: '0 auto' }}>
           <Form
             form={form}

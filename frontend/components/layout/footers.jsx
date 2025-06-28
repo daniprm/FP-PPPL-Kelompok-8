@@ -12,17 +12,11 @@ import React from 'react';
 function Footers() {
   return (
     <footer className='footer'>
-      <h2>Beach Resort | Hotel Room Booking System</h2>
+      <h2>Room Booking System</h2>
       <p>
-        ©2023 Beach Resort — Developed By
+        ©2023 Developed By
         {' '}
-        <a
-          href='http://www.samiurrahmanmukul.epizy.com'
-          rel='noreferrer'
-          target='_blank'
-        >
-          Samiur Rahman Mukul
-        </a>
+        PPPL [B] Kelompok 8
       </p>
     </footer>
   );

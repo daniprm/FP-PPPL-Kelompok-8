@@ -18,11 +18,11 @@ import Hero from '../components/home/Hero';
 import Services from '../components/home/Services';
 import MainLayout from '../components/layout';
 
-const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig } = getConfig(); // Should display http://localhost:3000
 
 function Home(props) {
   return (
-    <MainLayout title='Beach Resort ― Home'>
+    <MainLayout title='Home'>
       <Hero>
         <Banner
           title='luxurious rooms'

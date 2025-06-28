@@ -16,8 +16,8 @@ function MainLayout({ children, title }) {
   return (
     <>
       <Head>
-        <title>{title || 'Beach Resort'}</title>
-        <meta name='description' content='Beach Resort ― Hotel Room Booking System' />
+        <title>{title || 'PPPL B Kelompok 8'}</title>
+        <meta name='description' content='Hotel Room Booking System' />
         <meta content='width=device-width, initial-scale=1' name='viewport' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

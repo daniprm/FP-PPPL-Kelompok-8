@@ -19,7 +19,7 @@ import ApiService from '../utils/apiService';
 import { setSessionUserAndToken } from '../utils/authentication';
 
 function Login() {
-  window.document.title = 'Beach Resort — Login';
+  window.document.title = 'Login';
   const [loading, setLoading] = useState(false);
   const [errMsg, setErrMsg] = useState('');
 
@@ -57,7 +57,7 @@ function Login() {
         <Link to='/'>
           <img
             className='w-[280px] h-[65px] mx-auto'
-            alt='beach-resort-logo'
+            alt='logo'
             src={Logo}
           />
         </Link>
@@ -66,7 +66,7 @@ function Login() {
         {errMsg && <Alert message={errMsg} type='error' className='!text-center' />}
 
         <Form
-          name='beach-resort-login'
+          name='login'
           className='login-form mt-5'
           initialValues={{ remember: true }}
           onFinish={onFinish}
