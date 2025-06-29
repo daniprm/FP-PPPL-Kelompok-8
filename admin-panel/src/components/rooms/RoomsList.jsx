@@ -1,3 +1,12 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import {
   Avatar, Button, Empty, Modal, Pagination, Result, Skeleton, Tag
@@ -41,7 +50,7 @@ function RoomsList({ add }) {
           ApiService.delete(`/api/v1/delete-room/${id}`)
             .then((res) => {
               if (res?.result_code === 0) {
-                notificationWithIcon('success', 'SUCCESS', res?.result?.message || 'Room delete successful');
+                notificationWithIcon('success', 'SUCCESS', res?.result?.message || 'Room delete successfuls');
                 setFetchAgain(!fetchAgain);
                 resolve();
               } else {
@@ -56,6 +65,18 @@ function RoomsList({ add }) {
         }).catch(() => notificationWithIcon('error', 'ERROR', 'Oops errors!'));
       }
     });
+  };
+
+  const scaleRoomSize = (size) => {
+    const minRaw = 100;
+    const maxRaw = 700;
+    const minScaled = 5;
+    const maxScaled = 25;
+
+    const clamped = Math.max(minRaw, Math.min(size, maxRaw));
+    const scaled = ((clamped - minRaw) / (maxRaw - minRaw)) * (maxScaled - minScaled) + minScaled;
+
+    return Math.round(scaled);
   };
 
   return (
@@ -136,11 +157,11 @@ function RoomsList({ add }) {
                               {data?.room_type}
                             </Tag>
                           </td>
-                          <td className='data-table-body-tr-td !lowercase'>
-                            {`$ ${data?.room_price}`}
-                          </td>
                           <td className='data-table-body-tr-td'>
-                            {`${data?.room_size} sq. ft.`}
+                            {`Rp. ${(Number(data?.room_price) * 15000).toLocaleString('id-ID')}`}
+                          </td>
+                          <td className='data-table-body-tr-td !lowercase'>
+                            {`${scaleRoomSize(Number(data?.room_size))} m2`}
                           </td>
                           <td className='data-table-body-tr-td text-center'>
                             <Tag
