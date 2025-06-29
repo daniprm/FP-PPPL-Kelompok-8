@@ -1,12 +1,3 @@
-/**
- * @name Hotel Room Booking System
- * @author Md. Samiur Rahman (Mukul)
- * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
- * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
- * @version v0.0.1
- *
- */
-
 import { Button } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -27,7 +18,7 @@ function Navbar() {
         <div className='nav-header'>
           {/* app logo */}
           <Link href='/'>
-            <img src='/images//svg/logo.svg' alt='Reach Resort' />
+            <img src='/images//svg/logo.png' alt='Reach Resort' width='200' height='40' />
           </Link>
 
           {/* navbar toggle button */}
