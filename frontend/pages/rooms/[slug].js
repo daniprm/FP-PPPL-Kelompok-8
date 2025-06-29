@@ -81,7 +81,6 @@ function RoomPreview(props) {
                   <h6>
                     {`Size : ${props?.room?.data?.room_size} SQFT`}
                   </h6>
-                  
                   {props?.room?.data?.room_status === 'available' ? (
                     <Button
                       className='btn-primary'

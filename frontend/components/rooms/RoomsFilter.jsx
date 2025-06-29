@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import Title from '../home/Title';
 
 export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
-  const [allowBreakfast, setAllowBreakfast] = useState(false);
-  const [allowPets, setAllowPets] = useState(false);
+  // const [allowBreakfast, setAllowBreakfast] = useState(false);
+  // const [allowPets, setAllowPets] = useState(false);
 
   // function to handle `room_type` filed filtering
   const roomTypeFiltering = (value) => {
