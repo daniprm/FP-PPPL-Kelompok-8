@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Logo from '../assets/images/logo.svg';
+import Logo from '../assets/images/logo.png';
 import UserBox from '../components/shared/UserBox';
 import Dashboard from '../components/tabs/Dashboard';
 import MyProfile from '../components/tabs/MyProfile';
