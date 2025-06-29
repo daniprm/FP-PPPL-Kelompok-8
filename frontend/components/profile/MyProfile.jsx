@@ -9,7 +9,7 @@
 
 import { EditOutlined } from '@ant-design/icons';
 import {
-  Button, Descriptions, Image, Modal, Result, Skeleton, Tag, Tooltip, Upload
+  Button, Descriptions, Image, Result, Skeleton, Tag, Tooltip, Upload
 } from 'antd';
 import ImgCrop from 'antd-img-crop';
 import getConfig from 'next/config';
