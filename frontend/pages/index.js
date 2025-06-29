@@ -17,7 +17,7 @@ function Home(props) {
       <Hero>
         <Banner
           title='luxurious rooms'
-          subtitle='deluxe rooms starting at $299'
+          subtitle='deluxe rooms mulai dari Rp4.800.000,00'
         >
           <Link href='/rooms' className='btn-primary'>
             our rooms
