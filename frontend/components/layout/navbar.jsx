@@ -18,7 +18,7 @@ function Navbar() {
         <div className='nav-header'>
           {/* app logo */}
           <Link href='/'>
-            <img src='/images//svg/logo.svg' alt='Reach Resort' />
+            <img src='/images//svg/logo.png' alt='Reach Resort' width='200' height='40' />
           </Link>
 
           {/* navbar toggle button */}
