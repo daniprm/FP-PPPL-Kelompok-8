@@ -7,7 +7,7 @@
  *
  */
 
-import { EditOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { EditOutlined } from '@ant-design/icons';
 import {
   Button, Descriptions, Image, Modal, Result, Skeleton, Tag, Tooltip, Upload
 } from 'antd';
@@ -15,19 +15,16 @@ import ImgCrop from 'antd-img-crop';
 import getConfig from 'next/config';
 import React, { useState } from 'react';
 import useFetchData from '../../hooks/useFetchData';
-import ApiService from '../../utils/apiService';
-import { getSessionToken, getSessionUser, setSessionUserKeyAgainstValue } from '../../utils/authentication';
+import { getSessionToken, setSessionUserKeyAgainstValue } from '../../utils/authentication';
 import notificationWithIcon from '../../utils/notification';
 import { userStatusAsResponse } from '../../utils/responseAsStatus';
 import ProfileEditModal from './ProfileEditModal';
 
 const { publicRuntimeConfig } = getConfig();
-const { confirm } = Modal;
 
 function MyProfile() {
   const [editProfileModal, setEditProfileModal] = useState(false);
   const token = getSessionToken();
-  const user = getSessionUser();
 
   // fetch user profile API data
   const [loading, error, response] = useFetchData('/api/v1/get-user');
