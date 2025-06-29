@@ -1,24 +1,49 @@
-// import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Title from '../home/Title';
 
 export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
-  // const [allowBreakfast, setAllowBreakfast] = useState(false);
-  // const [allowPets, setAllowPets] = useState(false);
+  const [priceValue, setPriceValue] = useState(3000000);
+  const [roomType, setRoomType] = useState('all');
+  const [roomsCapped, setRoomsCapped] = useState([]);
 
-  // function to handle `room_type` filed filtering
-  const roomTypeFiltering = (value) => {
-    if (value === 'all') {
-      setOurFilteredRooms(ourRooms);
-    } else {
-      const filteredRooms = ourRooms.filter((room) => room.room_type === value);
-      setOurFilteredRooms(filteredRooms);
+  useEffect(() => {
+    if (ourRooms.length > 0) {
+      const cappedRooms = ourRooms.map((room) => {
+        // console.log('Room price (raw USD):', room.room_price);
+        const idr = room.room_price * 15000;
+        // console.log('Converted IDR before cap:', idr);
+        const capped = Math.min(idr, 3000000);
+        // console.log('Converted IDR after cap:', capped);
+        return {
+          ...room,
+          room_price_idr: capped
+        };
+      });
+      setRoomsCapped(cappedRooms);
+      setOurFilteredRooms(cappedRooms);
     }
+  }, [ourRooms]);
+
+  const applyFilters = (selectedType, selectedPrice) => {
+    if (roomsCapped.length === 0) return;
+
+    const filtered = roomsCapped.filter((room) => {
+      const matchType = selectedType === 'all' || room.room_type === selectedType;
+      const matchPrice = room.room_price_idr <= selectedPrice;
+      return matchType && matchPrice;
+    });
+
+    setOurFilteredRooms(filtered);
   };
 
-  // function to handle `room_price` filed filtering
-  const roomPriceFiltering = (value) => {
-    const filteredRooms = ourRooms.filter((room) => room.room_price <= parseInt(value, 10));
-    setOurFilteredRooms(filteredRooms);
+  const handleRoomTypeChange = (value) => {
+    setRoomType(value);
+    applyFilters(value, priceValue);
+  };
+
+  const handlePriceChange = (value) => {
+    setPriceValue(value);
+    applyFilters(roomType, value);
   };
 
   return (
@@ -26,40 +51,47 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
       <Title title='search rooms' />
 
       <form className='filter-form'>
-        {/* select type start */}
+        {/* Room type */}
         <div className='form-group'>
-          <label htmlFor='type'>rooms type</label>
+          <label htmlFor='type'>Room Type</label>
           <select
             className='form-control'
-            onChange={(e) => roomTypeFiltering(e.target.value)}
-            defaultValue='all'
             name='type'
             id='type'
+            value={roomType}
+            onChange={(e) => handleRoomTypeChange(e.target.value)}
           >
-            <option value='all'>All</option>
+            <option value='all'>Semua</option>
             <option value='single'>Single</option>
             <option value='couple'>Couple</option>
             <option value='family'>Family</option>
             <option value='presidential'>Presidential</option>
           </select>
         </div>
-        {/* select type end */}
 
-        {/* room price start */}
+        {/* Price range */}
         <div className='form-group'>
-          <label htmlFor='price'>started price $ 100</label>
+          <label htmlFor='price'>
+            Price to be chosen:
+            <br />
+            {new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 0
+            }).format(priceValue)}
+          </label>
           <input
             className='form-control'
             type='range'
             name='price'
             id='price'
-            min={100}
-            max={1000}
-            defaultValue={1000}
-            onChange={(e) => roomPriceFiltering(e.target.value)}
+            min={0}
+            max={3000000}
+            step={50000}
+            value={priceValue}
+            onChange={(e) => handlePriceChange(parseInt(e.target.value, 10))}
           />
         </div>
-        {/* room price end */}
       </form>
     </section>
   );
