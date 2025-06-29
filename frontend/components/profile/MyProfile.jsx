@@ -97,29 +97,15 @@ function MyProfile() {
             title='Profile Information'
             bordered
             extra={(
-              <>
-                {!user?.verified && (
-                  <Button
-                    style={{ marginTop: '10px', marginRight: '20px' }}
-                    onClick={handleVerifyEmail}
-                    shape='default'
-                    type='primary'
-                    size='large'
-                  >
-                    Verify Email
-                  </Button>
-                )}
-
-                <Button
-                  style={{ marginTop: '10px', marginRight: '20px' }}
-                  onClick={() => setEditProfileModal(true)}
-                  shape='default'
-                  type='primary'
-                  size='large'
-                >
-                  Edit Profile
-                </Button>
-              </>
+              <Button
+                style={{ marginTop: '10px', marginRight: '20px' }}
+                onClick={() => setEditProfileModal(true)}
+                shape='default'
+                type='primary'
+                size='large'
+              >
+                Edit Profile
+              </Button>
             )}
           >
             <Descriptions.Item label='Avatar' span={3}>
