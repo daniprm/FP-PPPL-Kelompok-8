@@ -1,12 +1,3 @@
-/**
- * @name Hotel Room Booking System
- * @author Md. Samiur Rahman (Mukul)
- * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
- * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
- * @version v0.0.1
- *
- */
-
 import { Empty, Result, Skeleton } from 'antd';
 import axios from 'axios';
 import getConfig from 'next/config';
@@ -26,7 +17,7 @@ function Home(props) {
       <Hero>
         <Banner
           title='luxurious rooms'
-          subtitle='deluxe rooms starting at $299'
+          subtitle='deluxe rooms mulai dari Rp4.800.000,00'
         >
           <Link href='/rooms' className='btn-primary'>
             our rooms

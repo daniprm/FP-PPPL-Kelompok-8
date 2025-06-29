@@ -1,12 +1,3 @@
-/**
- * @name Hotel Room Booking System
- * @author Md. Samiur Rahman (Mukul)
- * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
- * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
- * @version v0.0.1
- *
- */
-
 import {
   DashboardOutlined, FileProtectOutlined, FullscreenExitOutlined, FullscreenOutlined, HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined
 } from '@ant-design/icons';
@@ -15,7 +6,7 @@ import {
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Logo from '../assets/images/logo.svg';
+import Logo from '../assets/images/logo.png';
 import UserBox from '../components/shared/UserBox';
 import Dashboard from '../components/tabs/Dashboard';
 import MyProfile from '../components/tabs/MyProfile';

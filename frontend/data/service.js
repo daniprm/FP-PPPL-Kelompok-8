@@ -1,27 +1,28 @@
 import {
-  FaBeer, FaCocktail, FaHiking, FaShuttleVan
+  FaWifi
 } from 'react-icons/fa';
+import { MdOutlineSecurity, MdOutlineCleaningServices, MdSupportAgent } from 'react-icons/md';
 
 const services = [
   {
-    icon: <FaCocktail />,
-    title: 'free cocktails',
-    info: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est eaque error provident unde eligendi.'
+    icon: <FaWifi />,
+    title: 'Paket Konektivitas Super Cepat & Stabil',
+    info: 'Lupakan sinyal Wi-Fi yang putus-nyambung! Kami menyediakan koneksi internet berkecepatan tinggi yang stabil 24 jam di seluruh area kos.'
   },
   {
-    icon: <FaHiking />,
-    title: 'endless hiking',
-    info: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est eaque error provident unde eligendi.'
+    icon: <MdOutlineSecurity />,
+    title: 'Keamanan Terpadu 24/7',
+    info: 'Ketenangan Anda adalah prioritas kami. Kami menerapkan sistem keamanan berlapis untuk memastikan Anda dan barang-barang Anda selalu aman.'
   },
   {
-    icon: <FaShuttleVan />,
-    title: 'free shuttle',
-    info: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est eaque error provident unde eligendi.'
+    icon: <MdOutlineCleaningServices />,
+    title: 'Kebersihan Area Bersama Terjaga Setiap Hari',
+    info: 'Kos yang bersih membuat pikiran lebih jernih dan badan lebih sehat. Tim kebersihan kami secara rutin membersihkan area umum setiap hari.'
   },
   {
-    icon: <FaBeer />,
-    title: 'storages beer',
-    info: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores est eaque error provident unde eligendi.'
+    icon: <MdSupportAgent />,
+    title: 'Layanan Cepat Tanggap',
+    info: 'Ada masalah di kamar atau fasilitas kos? Jangan ragu untuk melapor. Tim pengelola kami siap sedia memberikan bantuan dengan cepat.'
   }
 ];
 
