@@ -81,16 +81,6 @@ function RoomPreview(props) {
                   <h6>
                     {`Size : ${props?.room?.data?.room_size} SQFT`}
                   </h6>
-                  <h6>
-                    Max capacity :
-                    {' '}
-                    {props?.room?.data?.room_capacity > 1
-                      ? `${props?.room?.data?.room_capacity} people`
-                      : `${props?.room?.data?.room_capacity} person`}
-                  </h6>
-                  <h6>{props?.room?.data?.allow_pets ? 'pets allowed' : 'no pets allowed'}</h6>
-                  <h6>{props?.room?.data?.provide_breakfast && 'free breakfast included'}</h6>
-
                   {props?.room?.data?.room_status === 'available' ? (
                     <Button
                       className='btn-primary'
