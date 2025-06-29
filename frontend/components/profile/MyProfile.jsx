@@ -1,3 +1,12 @@
+/**
+ * @name Hotel Room Booking System
+ * @author Md. Samiur Rahman (Mukul)
+ * @description Hotel Room Booking and Management System Software ~ Developed By Md. Samiur Rahman (Mukul)
+ * @copyright ©2023 ― Md. Samiur Rahman (Mukul). All rights reserved.
+ * @version v0.0.1
+ *
+ */
+
 import { EditOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import {
   Button, Descriptions, Image, Modal, Result, Skeleton, Tag, Tooltip, Upload
@@ -88,29 +97,15 @@ function MyProfile() {
             title='Profile Information'
             bordered
             extra={(
-              <>
-                {!user?.verified && (
-                  <Button
-                    style={{ marginTop: '10px', marginRight: '20px' }}
-                    onClick={handleVerifyEmail}
-                    shape='default'
-                    type='primary'
-                    size='large'
-                  >
-                    Verify Email
-                  </Button>
-                )}
-
-                <Button
-                  style={{ marginTop: '10px', marginRight: '20px' }}
-                  onClick={() => setEditProfileModal(true)}
-                  shape='default'
-                  type='primary'
-                  size='large'
-                >
-                  Edit Profile
-                </Button>
-              </>
+              <Button
+                style={{ marginTop: '10px', marginRight: '20px' }}
+                onClick={() => setEditProfileModal(true)}
+                shape='default'
+                type='primary'
+                size='large'
+              >
+                Edit Profile
+              </Button>
             )}
           >
             <Descriptions.Item label='Avatar' span={3}>
