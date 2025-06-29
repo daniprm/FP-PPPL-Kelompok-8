@@ -41,9 +41,6 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
         room_type: fetchResponse?.data?.room_type || undefined,
         room_price: fetchResponse?.data?.room_price || undefined,
         room_size: fetchResponse?.data?.room_size || undefined,
-        room_capacity: fetchResponse?.data?.room_capacity || undefined,
-        allow_pets: fetchResponse?.data?.allow_pets || false,
-        provide_breakfast: fetchResponse?.data?.provide_breakfast || false,
         featured_room: fetchResponse?.data?.featured_room || false,
         room_description: fetchResponse?.data?.room_description || undefined,
         extra_facilities: fetchResponse?.data?.extra_facilities || undefined,
@@ -65,9 +62,6 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
     formdata.append('room_type', values.room_type);
     formdata.append('room_price', values.room_price);
     formdata.append('room_size', values.room_size);
-    formdata.append('room_capacity', values.room_capacity);
-    formdata.append('allow_pets', values?.allow_pets || false);
-    formdata.append('provide_breakfast', values?.provide_breakfast || false);
     formdata.append('featured_room', values?.featured_room || false);
     formdata.append('room_description', values.room_description);
 
@@ -227,25 +221,6 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
                 max={1000}
               />
             </Form.Item>
-
-            <Form.Item
-              className='w-full md:w-1/2'
-              label='Room Capacity'
-              name='room_capacity'
-              rules={[{
-                required: true,
-                message: 'Please input your Room Capacity!'
-              }]}
-            >
-              <InputNumber
-                className='w-full'
-                placeholder='Room Capacity'
-                type='number'
-                size='large'
-                min={1}
-                max={10}
-              />
-            </Form.Item>
           </div>
 
           <Form.Item
@@ -311,12 +286,6 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
           </Form.Item>
 
           <div className='flex flex-col items-start justify-start gap-y-2'>
-            <Form.Item name='allow_pets' valuePropName='checked' noStyle>
-              <Checkbox className='ml-2.5'>Allow pets?</Checkbox>
-            </Form.Item>
-            <Form.Item name='provide_breakfast' valuePropName='checked' noStyle>
-              <Checkbox>Provide Breakfast?</Checkbox>
-            </Form.Item>
             <Form.Item name='featured_room' valuePropName='checked' noStyle>
               <Checkbox>Featured Room?</Checkbox>
             </Form.Item>

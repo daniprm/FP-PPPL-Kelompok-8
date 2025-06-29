@@ -30,26 +30,6 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
     setOurFilteredRooms(filteredRooms);
   };
 
-  // function to handle `provide_breakfast` filed filtering
-  useEffect(() => {
-    if (allowBreakfast) {
-      const filteredRooms = ourRooms.filter((room) => room.provide_breakfast === allowBreakfast);
-      setOurFilteredRooms(filteredRooms);
-    } else {
-      setOurFilteredRooms(ourRooms);
-    }
-  }, [allowBreakfast]);
-
-  // function to handle `allow_pets` filed filtering
-  useEffect(() => {
-    if (allowPets) {
-      const filteredRooms = ourRooms.filter((room) => room.allow_pets === allowPets);
-      setOurFilteredRooms(filteredRooms);
-    } else {
-      setOurFilteredRooms(ourRooms);
-    }
-  }, [allowPets]);
-
   return (
     <section className='filter-container'>
       <Title title='search rooms' />
@@ -89,34 +69,6 @@ export default function RoomFilter({ ourRooms, setOurFilteredRooms }) {
           />
         </div>
         {/* room price end */}
-
-        {/* extras start */}
-        <div className='form-group'>
-          {/* breakfast checked */}
-          <div className='single-extra'>
-            <input
-              name='breakfast'
-              type='checkbox'
-              id='breakfast'
-              checked={allowBreakfast}
-              onChange={() => setAllowBreakfast(!allowBreakfast)}
-            />
-            <label htmlFor='breakfast'>breakfast</label>
-          </div>
-
-          {/* pets checked */}
-          <div className='single-extra'>
-            <input
-              type='checkbox'
-              name='pets'
-              id='pets'
-              checked={allowPets}
-              onChange={() => setAllowPets(!allowPets)}
-            />
-            <label htmlFor='pets'>pets</label>
-          </div>
-        </div>
-        {/* extras end */}
       </form>
     </section>
   );
