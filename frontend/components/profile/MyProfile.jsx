@@ -56,33 +56,6 @@ function MyProfile() {
     }
   };
 
-  // function handle verify user email mail send
-  const handleVerifyEmail = () => {
-    confirm({
-      title: 'SEND EMAIL VERIFICATION LINK',
-      icon: <ExclamationCircleFilled />,
-      content: 'Are you sure send your email verification link?',
-      onOk() {
-        return new Promise((resolve, reject) => {
-          ApiService.post('/api/v1/auth/send-email-verification-link')
-            .then((res) => {
-              if (res?.result_code === 0) {
-                notificationWithIcon('success', 'SUCCESS', res?.result?.message || 'Verification link send successful');
-                resolve();
-              } else {
-                notificationWithIcon('error', 'ERROR', 'Sorry! Something went wrong. App server error');
-                reject();
-              }
-            })
-            .catch((err) => {
-              notificationWithIcon('error', 'ERROR', err?.response?.data?.result?.error?.message || err?.response?.data?.result?.error || 'Sorry! Something went wrong. App server error');
-              reject();
-            });
-        }).catch(() => notificationWithIcon('error', 'ERROR', 'Oops errors!'));
-      }
-    });
-  };
-
   return (
     <>
       <Skeleton loading={loading} paragraph={{ rows: 10 }} active avatar>
