@@ -4,7 +4,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { v4 as uniqueId } from 'uuid';
 import useFetchData from '../../hooks/useFetchData';
-import arrayToCommaSeparatedText from '../../utils/arrayToCommaSeparatedText';
+// import arrayToCommaSeparatedText from '../../utils/arrayToCommaSeparatedText';
 import { bookingStatusAsResponse } from '../../utils/responseAsStatus';
 import QueryOptions from '../shared/QueryOptions';
 import RoomStatusUpdateModal from '../shared/RoomStatusUpdateModal';
@@ -79,9 +79,24 @@ function Orders() {
                       {response?.data?.rows?.map((data) => (
                         <tr className='data-table-body-tr' key={uniqueId()}>
                           <td className='data-table-body-tr-td'>
-                            {arrayToCommaSeparatedText(data?.booking_dates?.map(
-                              (date) => (date.split('T')[0])
-                            ))}
+                            {/* Tampilkan range tanggal awal - akhir dengan format dd/MMMM/yyyy */}
+                            {(() => {
+                              const dates = data?.booking_dates;
+                              if (Array.isArray(dates) && dates.length > 0) {
+                                const start = dates[0].split('T')[0];
+                                const end = dates[dates.length - 1].split('T')[0];
+                                const formatDate = (dateStr) => {
+                                  const date = new Date(dateStr);
+                                  return date.toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: 'long',
+                                    year: 'numeric'
+                                  });
+                                };
+                                return `${formatDate(start)} - ${formatDate(end)}`;
+                              }
+                              return '-';
+                            })()}
                           </td>
                           <td className='data-table-body-tr-td text-center'>
                             <Tag

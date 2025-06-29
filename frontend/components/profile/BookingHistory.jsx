@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import useFetchData from '../../hooks/useFetchData';
 import ApiService from '../../utils/apiService';
-import arrayToCommaSeparatedText from '../../utils/arrayToCommaSeparatedText';
+// import arrayToCommaSeparatedText from '../../utils/arrayToCommaSeparatedText';
 import notificationWithIcon from '../../utils/notification';
 import { bookingStatusAsResponse } from '../../utils/responseAsStatus';
 import ReviewAddModal from '../utilities/ReviewAddModal';
@@ -88,11 +88,24 @@ function BookingHistory() {
                 </div>
               ),
               dataIndex: 'booking_dates',
-              render: (data) => (
-                arrayToCommaSeparatedText(data?.map(
-                  (date) => (date.split('T')[0])
-                ))
-              ),
+              render: (data) => {
+                if (Array.isArray(data) && data.length > 0) {
+                  // Ambil tanggal awal dan akhir
+                  const start = data[0].split('T')[0];
+                  const end = data[data.length - 1].split('T')[0];
+                  // Format ke dd/MMMM/yyyy
+                  const formatDate = (dateStr) => {
+                    const date = new Date(dateStr);
+                    return date.toLocaleDateString('en-GB', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric'
+                    });
+                  };
+                  return `${formatDate(start)} - ${formatDate(end)}`;
+                }
+                return '-';
+              },
               sorter: true,
               sortOrder: filter.sort,
               align: 'left'
