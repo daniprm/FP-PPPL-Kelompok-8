@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Calendar } from 'react-multi-date-picker';
-import DatePanel from 'react-multi-date-picker/plugins/date_panel';
+// import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 import DatePickerHeader from 'react-multi-date-picker/plugins/date_picker_header';
 import Toolbar from 'react-multi-date-picker/plugins/toolbar';
 import ApiService from '../../utils/apiService';
@@ -14,21 +14,47 @@ import notificationWithIcon from '../../utils/notification';
 const { confirm } = Modal;
 
 function OrderPlaceModal({ bookingModal, setBookingModal }) {
+  // Format range for display and show total days
+  const getRangeDisplay = (range) => {
+    if (Array.isArray(range) && range.length === 2 && range[0] && range[1]) {
+      const startDayjs = dayjs(range[0]);
+      const endDayjs = dayjs(range[1]);
+      const start = startDayjs.format('DD/MMMM/YYYY');
+      const end = endDayjs.format('DD/MMMM/YYYY');
+      const totalDays = endDayjs.diff(startDayjs, 'day') + 1;
+      return `${start} - ${end} (${totalDays} hari)`;
+    }
+    return '';
+  };
   const [selectedDates, setSelectedDates] = useState([]);
+  const [rangeValue, setRangeValue] = useState(null);
   const router = useRouter();
 
   // handle date change on date picker
+  // handle date change for range selection
   const handleDateChange = (dates) => {
-    const formattedDates = dates.map((date) => dayjs(date).format('YYYY-MM-DD'));
-    setSelectedDates(formattedDates);
+    if (Array.isArray(dates) && dates.length === 2) {
+      setRangeValue(dates);
+      // Generate all dates in the range
+      const start = dayjs(dates[0]);
+      const end = dayjs(dates[1]);
+      const range = [];
+      let current = start.clone();
+      while (current.isBefore(end, 'day') || current.isSame(end, 'day')) {
+        range.push(current.format('YYYY-MM-DD'));
+        current = current.add(1, 'day');
+      }
+      setSelectedDates(range);
+    } else {
+      setRangeValue(dates);
+      setSelectedDates([]);
+    }
   };
 
   // function to handle placed room booking order
   const handlePlacedOrder = () => {
     if (selectedDates.length === 0) {
       notificationWithIcon('error', 'ERROR', 'Minimum 1 date selection is required to placed an room booking order.');
-    } else if (selectedDates.length > 5) {
-      notificationWithIcon('error', 'ERROR', 'Maximum 5 days selection possible to placed an room booking order.');
     } else {
       confirm({
         title: 'Are your selected dates booked this Room?',
@@ -63,7 +89,7 @@ function OrderPlaceModal({ bookingModal, setBookingModal }) {
 
   return (
     <Modal
-      title='Select data which dates are you Booked Room:'
+      title='Select range of dates you want to book:'
       open={bookingModal.open}
       onOk={() => setBookingModal((prevState) => (
         { ...prevState, open: false, roomId: null }
@@ -97,6 +123,19 @@ function OrderPlaceModal({ bookingModal, setBookingModal }) {
         </div>
       ]}
     >
+      {/* Display selected range in desired format */}
+      {getRangeDisplay(rangeValue) && (
+        <div
+          style={{
+            marginBottom: 16,
+            textAlign: 'center',
+            fontWeight: 'bold',
+            color: '#1677ff' // Ant Design blue (same as calendar highlight)
+          }}
+        >
+          {getRangeDisplay(rangeValue)}
+        </div>
+      )}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Calendar
           style={{ width: '100%' }}
@@ -106,24 +145,17 @@ function OrderPlaceModal({ bookingModal, setBookingModal }) {
               position='top'
               size='medium'
             />,
-            <DatePanel
-              style={{ width: '100%' }}
-              key='date-panel'
-              position='right'
-              sort='date'
-            />,
             <Toolbar
               key='toolbar'
               position='bottom'
             />
           ]}
           minDate={new Date(new Date()).setDate(new Date().getDate() + 1)}
-          maxDate={new Date(new Date()).setDate(new Date().getDate() + 30)}
           onChange={handleDateChange}
-          value={selectedDates}
-          format='YYYY/MM/DD'
+          value={rangeValue}
+          format='DD/MM/YYYY'
           highlightToday
-          multiple
+          range
         />
       </div>
     </Modal>

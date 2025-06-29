@@ -71,11 +71,9 @@ function RoomsList({ add }) {
     const minRaw = 100;
     const maxRaw = 700;
     const minScaled = 5;
-    const maxScaled = 25;
-
+    const maxScaled = 20;
     const clamped = Math.max(minRaw, Math.min(size, maxRaw));
     const scaled = ((clamped - minRaw) / (maxRaw - minRaw)) * (maxScaled - minScaled) + minScaled;
-
     return Math.round(scaled);
   };
 
