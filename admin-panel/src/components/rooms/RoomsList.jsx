@@ -156,7 +156,7 @@ function RoomsList({ add }) {
                             </Tag>
                           </td>
                           <td className='data-table-body-tr-td'>
-                            {`Rp. ${(Number(data?.room_price) * 15000).toLocaleString('id-ID')}`}
+                            {`Rp. ${Math.min(Number(data?.room_price) * 15000, 3000000).toLocaleString('id-ID')}`}
                           </td>
                           <td className='data-table-body-tr-td !lowercase'>
                             {`${scaleRoomSize(Number(data?.room_size))} m2`}
