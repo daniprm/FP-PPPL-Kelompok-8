@@ -133,14 +133,6 @@ function MyProfile() {
                 {userStatusAsResponse(response?.data?.status).level}
               </Tag>
             </Descriptions.Item>
-            <Descriptions.Item label='Verified'>
-              <Tag
-                style={{ width: '50px', textAlign: 'center', textTransform: 'capitalize' }}
-                color={response?.data?.verified ? 'success' : 'error'}
-              >
-                {response?.data?.verified ? 'Yes' : 'No'}
-              </Tag>
-            </Descriptions.Item>
             <Descriptions.Item label='Date Of Birth' span={2}>
               {response?.data?.dob?.split('T')[0] || 'N/A'}
             </Descriptions.Item>
