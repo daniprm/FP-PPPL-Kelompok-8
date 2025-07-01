@@ -122,7 +122,7 @@ function Main() {
         break;
       }
       case '3': {
-        window.document.title = 'Hotel Rooms';
+        window.document.title = 'Lodging';
         break;
       }
       case '4': {
@@ -169,7 +169,7 @@ function Main() {
             {
               key: '3',
               icon: <HomeOutlined />,
-              label: 'Hotel Rooms'
+              label: 'Lodging'
             },
             {
               key: '4',
