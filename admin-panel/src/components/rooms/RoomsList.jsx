@@ -67,14 +67,10 @@ function RoomsList({ add }) {
     });
   };
 
-  const scaleRoomSize = (size) => {
-    const minRaw = 100;
-    const maxRaw = 700;
-    const minScaled = 5;
-    const maxScaled = 20;
-    const clamped = Math.max(minRaw, Math.min(size, maxRaw));
-    const scaled = ((clamped - minRaw) / (maxRaw - minRaw)) * (maxScaled - minScaled) + minScaled;
-    return Math.round(scaled);
+  const scaleRoomSize = (sqft) => {
+    if (!sqft) return 0;
+    const sqm = sqft / 10.7639;
+    return Math.min(sqm, 30).toFixed(0);
   };
 
   return (

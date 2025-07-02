@@ -10,6 +10,12 @@ function RoomDetails({ id }) {
   // fetch room-details API data
   const [loading, error, response] = useFetchData(`/api/v1/get-room-by-id-or-slug-name/${id}`);
 
+  const scaleRoomSize = (sqft) => {
+    if (!sqft) return 0;
+    const sqm = sqft / 10.7639;
+    return Math.min(sqm, 30).toFixed(0);
+  };
+
   return (
     <Skeleton loading={loading} paragraph={{ rows: 10 }} active avatar>
       {error ? (
@@ -65,13 +71,13 @@ function RoomDetails({ id }) {
             label={<span className='whitespace-nowrap'>Room Price</span>}
             span={2}
           >
-            {`$ ${response?.data?.room_price}`}
+            {`Rp. ${Math.min(Number(response?.data?.room_price) * 15000, 3000000).toLocaleString('id-ID')}`}
           </Descriptions.Item>
 
           <Descriptions.Item
             label={<span className='whitespace-nowrap'>Room Size</span>}
           >
-            {`${response?.data?.room_size} sq. ft.`}
+            {`${scaleRoomSize(response?.data?.room_size)} m2`}
           </Descriptions.Item>
           <Descriptions.Item
             label={<span className='whitespace-nowrap'>Room Capacity</span>}

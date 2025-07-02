@@ -23,12 +23,16 @@ function CreateRoom() {
 
   // function to handle create new room
   const onFinish = (values) => {
+    const usdPrice = Math.round(values.room_price / 15000);
+    const sqftSize = Number(values.room_size) * 10.7639;
+
     const formdata = new FormData();
     formdata.append('room_name', values.room_name);
     formdata.append('room_slug', values.room_slug);
     formdata.append('room_type', values.room_type);
-    formdata.append('room_price', values.room_price);
-    formdata.append('room_size', values.room_size);
+    formdata.append('room_price', usdPrice);
+    formdata.append('room_size', sqftSize.toFixed(2));
+    formdata.append('room_capacity', values.room_capacity);
     formdata.append('featured_room', values?.featured_room || false);
     formdata.append('room_description', values.room_description);
 
@@ -144,7 +148,7 @@ function CreateRoom() {
             type='number'
             size='large'
             min={1}
-            max={100000}
+            max={3000000}
           />
         </Form.Item>
       </div>
@@ -164,11 +168,34 @@ function CreateRoom() {
             placeholder='Room Size'
             type='number'
             size='large'
-            min={1}
-            max={1000}
+            min={5}
+            max={30}
           />
         </Form.Item>
 
+        <Form.Item
+          className='w-full md:w-1/2'
+          label='Room Capacity'
+          name='room_capacity'
+          rules={[
+            {
+              required: true,
+              message: 'Please input the room capacity!'
+            },
+            {
+              type: 'number',
+              min: 1,
+              message: 'Capacity must be at least 1'
+            }
+          ]}
+        >
+          <InputNumber
+            min={1}
+            max={100} // adjust as needed
+            placeholder='Enter room capacity'
+            style={{ width: '100%' }}
+          />
+        </Form.Item>
       </div>
 
       <Form.Item

@@ -17,6 +17,9 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
   const [fileList, setFileList] = useState([]);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const [idrValue, setIdrValue] = useState(0);
+  const exchangeRate = 15000;
+  const priceCapIDR = 3000000;
 
   // fetch room-details API data
   const [fetchLoading, fetchError, fetchResponse] = useFetchData(
@@ -26,12 +29,18 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
   // set form data from API data
   useEffect(() => {
     if (fetchResponse) {
+      const usd = fetchResponse?.data?.room_price || 0;
+      const idr = Math.min(usd * exchangeRate, priceCapIDR);
+      const sqft = fetchResponse?.data?.room_size || 0;
+      const sqm = Number(sqft) / 10.7639;
+
       form.setFieldsValue({
         room_name: fetchResponse?.data?.room_name || undefined,
         room_slug: fetchResponse?.data?.room_slug || undefined,
         room_type: fetchResponse?.data?.room_type || undefined,
-        room_price: fetchResponse?.data?.room_price || undefined,
-        room_size: fetchResponse?.data?.room_size || undefined,
+        room_price: idr,
+        room_size: parseFloat(sqm.toFixed(0)),
+        room_capacity: fetchResponse?.data?.room_capacity || undefined,
         featured_room: fetchResponse?.data?.featured_room || false,
         room_description: fetchResponse?.data?.room_description || undefined,
         extra_facilities: fetchResponse?.data?.extra_facilities || undefined,
@@ -47,12 +56,16 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
 
   // function to handle create new room
   const onFinish = (values) => {
+    const usdValue = Math.round(values.room_price / exchangeRate);
+    const sqftSize = Number(values.room_size) * 10.7639;
+
     const formdata = new FormData();
     formdata.append('room_name', values.room_name);
     formdata.append('room_slug', values.room_slug);
     formdata.append('room_type', values.room_type);
-    formdata.append('room_price', values.room_price);
-    formdata.append('room_size', values.room_size);
+    formdata.append('room_price', usdValue);
+    formdata.append('room_size', sqftSize.toFixed(2));
+    formdata.append('room_capacity', values.room_capacity);
     formdata.append('featured_room', values?.featured_room || false);
     formdata.append('room_description', values.room_description);
 
@@ -184,11 +197,14 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
             >
               <InputNumber
                 className='w-full'
-                placeholder='Room Price'
-                type='number'
+                placeholder='Room Price in IDR'
                 size='large'
-                min={1}
-                max={100000}
+                min={15000}
+                max={priceCapIDR}
+                value={idrValue}
+                onChange={(value) => setIdrValue(value)}
+                formatter={(value) => `Rp ${Number(value).toLocaleString('id-ID')}`}
+                parser={(value) => value.replace(/[^\d]/g, '')}
               />
             </Form.Item>
           </div>
@@ -210,6 +226,30 @@ function RoomEdit({ roomEditModal, setRoomEditModal }) {
                 size='large'
                 min={1}
                 max={1000}
+              />
+            </Form.Item>
+
+            <Form.Item
+              className='w-full md:w-1/2'
+              label='Room Capacity'
+              name='room_capacity'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input the room capacity!'
+                },
+                {
+                  type: 'number',
+                  min: 1,
+                  message: 'Capacity must be at least 1'
+                }
+              ]}
+            >
+              <InputNumber
+                min={1}
+                max={100} // adjust as needed
+                placeholder='Enter room capacity'
+                style={{ width: '100%' }}
               />
             </Form.Item>
           </div>
