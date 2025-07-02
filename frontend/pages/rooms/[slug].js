@@ -22,6 +22,12 @@ function RoomPreview(props) {
   const user = getSessionUser();
   const router = useRouter();
 
+  const scaleRoomSize = (sqft) => {
+    if (!sqft) return 0;
+    const sqm = sqft / 10.7639;
+    return Math.min(sqm, 30).toFixed(0);
+  };
+
   const handleOrder = () => {
     if (!token && !user) {
       notificationWithIcon('error', 'ERROR', 'Please Registration/Login first to place an order.');
@@ -82,7 +88,7 @@ function RoomPreview(props) {
                     }).format(Math.min(props?.room?.data?.room_price * 15000, 3000000))}`}
                   </h6>
                   <h6>
-                    {`Luas : ${Math.round(props?.room?.data?.room_size * 0.092903)} m²`}
+                    {`Luas : ${scaleRoomSize(props?.room?.data?.room_size)} m²`}
                   </h6>
                   {props?.room?.data?.room_status === 'available' ? (
                     <Button
